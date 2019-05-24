@@ -1,19 +1,16 @@
-#Find
+# Search for:
 			self.loadingGage.SetPercentage(2+98*p/100, 100)
 			
-#Change
+# Add after:
 			self.loadingGage.SetPercentage(p, 160)
 		
-#Find
-	def LoadData(self, playerX, playerY):
-	
-#Add Above
-	def bos(self):
-		pass
-		
-#Find
+# Search for:
 		self.__SetProgress(0)
 		
-#Add Above		
-		checkin, _ = zip(*self.loadStepList)
-		self.loadStepList = sorted(self.loadStepList+[(i, ui.__mem_func__(self.bos)) for i in range(min(checkin), max(checkin)+1) if i not in checkin])
+# Add after:
+		tmpLoadStepList = tuple(zip(*self.loadStepList))[0]
+		for progress in range(tmpLoadStepList[0], tmpLoadStepList[-1] + 1):
+			if progress not in tmpLoadStepList:
+				self.loadStepList.append((progress, lambda: None))
+			
+		self.loadStepList.sort()
